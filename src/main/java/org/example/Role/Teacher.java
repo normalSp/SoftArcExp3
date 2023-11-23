@@ -27,7 +27,8 @@ public class Teacher {
     * @param tea_password
     * @pdOid 8a3119da-b765-4736-a4a9-8baf57b61139 */
    public boolean login(int tea_id, String tea_password) {
-      // TODO: implement
+      if(this.tea_id == tea_id && this.tea_password == tea_password)
+         return true;
       return false;
    }
    
@@ -35,15 +36,16 @@ public class Teacher {
     * @pdOid 87b101d8-ca6a-46f5-937e-d465b617462a */
    public List<Student> getStudntList(Course course) {
       // TODO: implement
-      return null;
+      return course.getStudntList();
    }
    
    /** @param course 
     * @param stu_id
     * @pdOid 88f63a3d-da60-4266-952c-bfd27fd92456 */
-   public boolean scoreEntry(Course course, int stu_id) {
+   public boolean scoreEntry(Grade grade, int score) {
       // TODO: implement
-      return false;
+      grade.setGrade(score);
+      return true;
    }
 
    public Teacher(int tea_id, String tea_name, String tea_password) {

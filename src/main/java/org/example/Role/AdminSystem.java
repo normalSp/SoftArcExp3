@@ -18,6 +18,10 @@ public class AdminSystem {
    private List<Teacher> tea_list;
    /** @pdOid 1af4f0f8-4c93-4c5a-babb-cac46ae87319 */
    private List<Course> cour_list;
+   private List<Course> select_cour_list;
+   private List<TrainingPlan> train_list;
+   private List<Grade> grade_list;
+
    /** @pdOid 485a6661-95ba-46bd-97dd-683b39d86681 */
    private int admin_id;
    /** @pdOid 05a1fab8-6eb7-43ec-8519-562bd32280c5 */
@@ -49,19 +53,19 @@ public class AdminSystem {
    /** @pdOid 6b100edf-be21-4fec-b732-2564680f731b */
    public List<Student> getStudentList() {
       // TODO: implement
-      return null;
+      return this.stu_list;
    }
    
    /** @pdOid 1a139685-0bda-4224-a865-8003164c5c28 */
    public List<Teacher> getTeacherList() {
       // TODO: implement
-      return null;
+      return this.tea_list;
    }
    
    /** @pdOid 69543440-1e63-4dd9-80eb-7daa14651a45 */
    public List<Course> getCourseList() {
       // TODO: implement
-      return null;
+      return this.cour_list;
    }
    
    /** @param stu_id 
@@ -76,50 +80,58 @@ public class AdminSystem {
     * @pdOid b85a0109-e01c-40be-a391-17f186e5e795 */
    public boolean addCourse(Course course) {
       // TODO: implement
-      return false;
+      this.cour_list.add(course);
+      return true;
    }
    
    /** @param cour_id
     * @pdOid 9d519205-18ff-4d04-96f8-df48e62c0b73 */
    public boolean deleteCourse(int cour_id) {
       // TODO: implement
-      return false;
+      this.cour_list.remove(cour_id);
+      return true;
    }
    
    /** @param student
     * @pdOid e5a572b9-7002-458d-a9b4-6bef584dfd20 */
    public boolean addStudent(Student student) {
       // TODO: implement
-      return false;
+      this.stu_list.add(student);
+      return true;
    }
    
    /** @param stu_id
     * @pdOid ad0c3093-e3dc-48f5-a1f2-6f5d5ceeb8a3 */
    public boolean deleteStudent(int stu_id) {
       // TODO: implement
-      return false;
+      this.stu_list.remove(stu_id);
+      return true;
    }
    
    /** @param teacher
     * @pdOid 03d834a1-eba1-4f96-afdd-78322017c834 */
    public boolean addTeacher(Teacher teacher) {
       // TODO: implement
-      return false;
+      this.tea_list.add(teacher);
+      return true;
    }
    
    /** @param tea_id
     * @pdOid 4251ed04-9efa-4d9d-a199-38ac87ce6fa4 */
    public boolean deleteTeacher(int tea_id) {
       // TODO: implement
-      return false;
+      this.tea_list.remove(tea_id);
+      return true;
    }
    
    /** @param stu_id 
     * @param cour_id 
     * @param grade
     * @pdOid 45a7c873-1fea-48f1-86fa-00a48832f288 */
-   public boolean addGrade(int stu_id, int cour_id, String grade) {
+   public boolean addGrade(int stu_id, int cour_id, int grade, int grade_id) {
       // TODO: implement
+      Grade grade1 = new Grade(stu_id, cour_id, grade, grade_id);
+      this.grade_list.add(grade1);
       return false;
    }
    
@@ -127,20 +139,30 @@ public class AdminSystem {
     * @pdOid 07609841-46a4-48c9-a287-304257906127 */
    public boolean addCourseToTrainPlan(int cour_id) {
       // TODO: implement
+      for(int i = 0, len = this.course_list.size(); i < len; i++){
+         if (this.course_list.get(i).getCourse_id() == cour_id) {
+            for (int j = 0, len1 = this.grade_list.size(); j < len1; j++) {
+                if (this.grade_list.get(j).getGrade_id() == cour_id) {
+                   this.cour_list.add(grade_list.get(j));
+                   return true;
+                     }
+                }
+         }
+      }
       return false;
    }
-   
-   /** @param cour_id
-    * @pdOid 03382bf7-8333-40ae-8770-43a244b1c21f */
-   public boolean deleCourseFromTrainPlan(int cour_id) {
-      // TODO: implement
-      return false;
-   }
+
    
    /** @param train_id
     * @pdOid 1b5f03fd-fb7a-42c6-a6f6-3a88c3e34716 */
-   public boolean alterTrainingPlanDescribe(int train_id) {
+   public boolean alterTrainingPlanDescribe(int train_id, String des) {
       // TODO: implement
+      for(int i = 0, isize = this.cour_list.size(); i < isize; i++){
+         if(this.train_list.get(i).getTrain_id() == train_id){
+            train_list.get(i).setDescribe(des);
+            return true;
+         }
+      }
       return false;
    }
    
@@ -152,4 +174,30 @@ public class AdminSystem {
    }
 
    private AdminSystem(){}
+
+   public List<Course> getCour_list() {
+      return cour_list;
+   }
+
+   public List<Course> getSelectCour_list(int stu_id) {
+      select_cour_list.removeAll();
+      for(int i = 0; i < this.cour_list.size(); i++)
+         if (this.cour_list.get(i).getStu_id() == stu_id)
+            {
+                select_cour_list.add(this.cour_list.get(i));
+            }
+            if (select_cour_list.size() == 0) {
+                this.cour_list.removeAll(this.cour_list);
+                select_cour_list.add(this.cour_list.get(0));
+            }
+      return select_cour_list;
+   }
+
+   public List<TrainingPlan> getTrain_list() {
+      return train_list;
+   }
+
+   public void setTrain_list(List<TrainingPlan> train_list) {
+      this.train_list = train_list;
+   }
 }

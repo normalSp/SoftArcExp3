@@ -51,11 +51,10 @@ public class TrainingPlan {
       this.train_id = train_id;
    }
 
-   /** @param trainId
-    * @pdOid a9d089c7-4a39-44d8-a04c-dac34ec187da */
-   public Boolean trainPlan(int trainId) {
-      // TODO: implement
-      return null;
+   public TrainingPlan(int stu_id, String describe, List<Course> cour_list, int train_id) {
+      this.stu_id = stu_id;
+      this.describe = describe;
+      this.cour_list = cour_list;
+      this.train_id = train_id;
    }
-
 }

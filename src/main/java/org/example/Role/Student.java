@@ -24,64 +24,99 @@ public class Student {
    public Collection<Course> course;
    /** @pdRoleInfo migr=no name=TrainingPlan assc=Association_9 coll=java.util.Collection impl=java.util.HashSet mult=0..* */
    public Collection<TrainingPlan> trainingPlan;
-   
+
+   public Student stu = null;
    /** @param stu_id 
     * @param stu_name 
     * @param stu_password
     * @pdOid 10d5e19e-d943-49fc-bd75-ef0ceb20c875 */
    public boolean register(int stu_id, String stu_name, String stu_password) {
       // TODO: implement
-      return false;
+      stu = new Student(stu_id, stu_name, stu_passwordu);
+      return stu;
    }
-   
-   /** @param stu_id 
+
+   public Student(int stu_id, String stu_name, String stu_password) {
+      this.stu_id = stu_id;
+      this.stu_name = stu_name;
+      this.stu_password = stu_password;
+   }
+
+   /** @param stu_id
     * @param stu_password
     * @pdOid bb6be6b9-d596-4e7c-bfc5-00e558f9399e */
    public boolean login(int stu_id, String stu_password) {
       // TODO: implement
+      if(this.stu_id == stu_id && this.stu_password == stu_password)
+         return true;
       return false;
    }
    
    /** @pdOid 982ea76b-3830-467a-8193-900bdedb5345 */
-   public List<Course> getCourseList() {
+   public List<Course> getCourseList(AdminSystem admin) {
       // TODO: implement
-      return null;
+      return admin.getCour_list;
    }
    
    /** @pdOid 80f216cf-07b8-4156-8f7b-ed1bd732c101 */
-   public List<Course> getSelectdeCourses() {
+   public List<Course> getSelectdeCourses(AdminSystem admin) {
       // TODO: implement
+      int stu_id = stu.getStu_id();
+      if (stu_id > 0)
+          return admin.getSelectCour_list(stu_id);
+      else
       return null;
    }
-   
+
+   public int getStu_id() {
+      return stu_id;
+   }
+
    /** @param cour_id
     * @pdOid da2ea534-aceb-4171-a151-a526e06e1e64 */
-   public Course selectCourse(int cour_id) {
+   public Course selectCourse(int cour_id, AdminSystem admin) {
       // TODO: implement
+      List<Course> course_list = admin.getCour_list();
+      List<TrainingPlan> train_list = admin.getTrain_list();
+      for(int i = 0; i < course_list.size(); i++) {
+         if (cour_id == course_list.get(i).getCour_id()) {
+            for (int j = 0; j < train_list.size(); j++) {
+               if (this.stu_id == train_list.get(j).getStu_id()) {
+                  train_list.get(j).setCourse_id(cour_id);
+                  return true;
+               }
+            }
+         }
+      }
       return null;
    }
-   
+
    /** @param cour_id
     * @pdOid 92929130-f401-4c70-ba8d-935b57d1ee6a */
-   public boolean withdrawCourse(int cour_id) {
+   public boolean withdrawCourse(int cour_id, AdminSystem admin) {
       // TODO: implement
+      List<TrainingPlan> train_list = admin.getTrain_list;
+      for(int i =0, i < train_list.size(); i++){
+         if(cour_id == train_list.get(i).getCour_id()) {
+            train_list.remove(i);
+            admin.setTrain_list(train_list);
+            return true;
+         }
+      }
       return false;
    }
    
    /** @param train_id
     * @pdOid 40ac5964-bbbb-480d-80c4-1931a8e43361 */
-   public TrainingPlan getTrainingPlan(int train_id) {
+   public TrainingPlan getTrainingPlan(int train_id, AdminSystem admin) {
       // TODO: implement
+      List<TrainingPlan> train_list = admin.getTrain_list;
+      for(int i =0, i < train_list.size(); i++){
+         if(train_id == train_list.get(i).getTrain_id())
+            return train_list.get(i);
+      }
       return null;
    }
-   
-   /** @param stuId
-    * @pdOid 4e69cc51-5622-4ec5-844c-922975ff959d */
-   public Boolean student(int stuId) {
-      // TODO: implement
-      return null;
-   }
-   
    
    /** @pdGenerated default getter */
    public Collection<Course> getCourse() {
