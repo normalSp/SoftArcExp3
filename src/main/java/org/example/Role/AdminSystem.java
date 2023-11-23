@@ -24,12 +24,6 @@ public class AdminSystem {
    private int admin_password;
 
    private static AdminSystem instance = null;
-
-   /** @param admi
-    * @pdOid cf5f12c9-623b-41d7-83fc-9c0581eb7fa1 */
-   private void adminSystem(int admi) {
-      // TODO: implement
-   }
    
    /** @pdRoleInfo migr=no name=Student assc=Association_1 coll=java.util.Collection impl=java.util.HashSet mult=1..1 */
    public Student student;
@@ -47,6 +41,8 @@ public class AdminSystem {
     * @pdOid e6424df4-518c-4f88-a5d2-8063c5f79f03 */
    public boolean login(int admin_id, String admin_password) {
       // TODO: implement
+      if(admin_id == this.admin_id && admin_password == this.admin_password)
+         return true;
       return false;
    }
    

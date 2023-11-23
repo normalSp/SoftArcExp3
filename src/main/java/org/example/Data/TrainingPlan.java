@@ -18,25 +18,39 @@ public class TrainingPlan {
    private List<Course> cour_list;
    /** @pdOid 6cb7111c-b808-474a-b032-0c9e6608bafb */
    private int train_id;
-   
-   /** @pdOid 41515b01-1bb8-4e39-b449-25167c65de03 */
-   public int getStudentId() {
-      // TODO: implement
-      return 0;
+
+   public int getStu_id() {
+      return stu_id;
    }
-   
-   /** @pdOid 46bcdcc7-d37b-4219-b86a-d5de28592c8b */
+
+   public void setStu_id(int stu_id) {
+      this.stu_id = stu_id;
+   }
+
    public String getDescribe() {
-      // TODO: implement
-      return null;
+      return describe;
    }
-   
-   /** @pdOid 10a67423-e068-45b6-a6d8-3d68cc905c2f */
-   public List<Course> getCourseList() {
-      // TODO: implement
-      return null;
+
+   public void setDescribe(String describe) {
+      this.describe = describe;
    }
-   
+
+   public List<Course> getCour_list() {
+      return cour_list;
+   }
+
+   public void setCour_list(List<Course> cour_list) {
+      this.cour_list = cour_list;
+   }
+
+   public int getTrain_id() {
+      return train_id;
+   }
+
+   public void setTrain_id(int train_id) {
+      this.train_id = train_id;
+   }
+
    /** @param trainId
     * @pdOid a9d089c7-4a39-44d8-a04c-dac34ec187da */
    public Boolean trainPlan(int trainId) {

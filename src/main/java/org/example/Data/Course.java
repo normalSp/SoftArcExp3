@@ -21,26 +21,29 @@ public class Course {
    /** @pdOid 584b4290-e617-4c69-964c-c552177034e2 */
    public int getCourseId() {
       // TODO: implement
-      return 0;
+      return cour_id
    }
    
    /** @pdOid 3cdcec16-1767-42e6-8c16-72af33024d9c */
    public String getCourseName() {
       // TODO: implement
-      return null;
+      return cour_name;
    }
    
    /** @pdOid f919a1fa-d0e8-4f06-b424-9dc29852c8c6 */
    public Teacher getTeacher() {
       // TODO: implement
-      return null;
-   }
-   
-   /** @param courId
-    * @pdOid 8dcbc6d5-e1c1-41fd-801f-7fcbd34009f2 */
-   public Boolean course(int courId) {
-      // TODO: implement
-      return null;
+      return teacher;
    }
 
+   public void setTeacher(Teacher teacher){
+      this.teacher = teacher;
+   }
+
+   public Course(int cour_id, int cour_name, Teacher teacher, Grade grade) {
+      this.cour_id = cour_id;
+      this.cour_name = cour_name;
+      this.teacher = teacher;
+      this.grade = grade;
+   }
 }

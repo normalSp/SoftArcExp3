@@ -45,15 +45,13 @@ public class Teacher {
       // TODO: implement
       return false;
    }
-   
-   /** @param teaId
-    * @pdOid e570eb76-bfec-49bf-b768-c2b8d32294cc */
-   public Boolean teacher(int teaId) {
-      // TODO: implement
-      return null;
+
+   public Teacher(int tea_id, String tea_name, String tea_password) {
+      this.tea_id = tea_id;
+      this.tea_name = tea_name;
+      this.tea_password = tea_password;
    }
-   
-   
+
    /** @pdGenerated default getter */
    public Collection<Course> getCourse() {
       if (course == null)
